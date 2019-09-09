@@ -1,11 +1,12 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.Test;
+import org.junit.*;
 
 public class Tests {
   @Test
   public void testBodyMassIndex() {
     //TODO: Tests go here
+	assertEquals("bodyMassIndex() should return a string", "java.lang.String", PPA1.bodyMassIndex().getClass().getName());
   }
 
   @Test

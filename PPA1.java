@@ -22,19 +22,23 @@ public class PPA1 {
     }
   }
 
-  public String bodyMassIndex() {
+  public static String bodyMassIndex() {
     //TODO: Function body here
+	return "";
   }
 
-  public String retirement() {
+  public static String retirement() {
     //TODO: Function body here
+	return "";
   }
 
-  public String shortestDistance() {
+  public static String shortestDistance() {
     //TODO: Function body here
+	return "";
   }
 
-  public String splitTip() {
-    //TODO: Funtion body here
+  public static String splitTip() {
+    //TODO: Function body here
+	return "";
   }
 }
