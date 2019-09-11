@@ -140,7 +140,7 @@ public class PPA1 {
 		  difference = difference - .01;
 	  }
 	  for(int i=0; i < guests; i++) {
-		  guestPay += ("guest" + (i+1) + "-" + guestdist[i] + "\n");
+		  guestPay += ("guest" + (i+1) + "-$" + guestdist[i] + "\n");
 	  }
 	  return guestPay;
   }

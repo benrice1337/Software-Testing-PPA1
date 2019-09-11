@@ -38,6 +38,6 @@ public class Tests {
   public void testSplitTip() {
 	assertEquals("Thats too many people", "Number of guests exceeds 50", PPA1.splitTip(51, 100));
 	assertEquals("Rounding appropriately is important", 38.33, PPA1.splitter(3, 100), .5);
-    assertEquals("Everyone pays their part.", "guest1-38.34\nguest2-38.33\nguest3-38.33\n", PPA1.splitTip(3, 100.00));
+    assertEquals("Everyone pays their part.", "guest1-$38.34\nguest2-$38.33\nguest3-$38.33\n", PPA1.splitTip(3, 100.00));
   }
 }
