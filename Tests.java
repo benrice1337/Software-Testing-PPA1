@@ -30,11 +30,14 @@ public class Tests {
 
   @Test
   public void testShortestDistance() {
-    //TODO: Tests go here
+	assertEquals("This seems right", "The distance is 0.0", PPA1.shortestDistance(100, 100, 100, 100));
+	assertEquals("distCalc() should return the distance between two coordinates", 316.227766, PPA1.distCalc(100, 100, 200, 400), .5);
   }
 
   @Test
   public void testSplitTip() {
-    //TODO: Tests go here
+	assertEquals("Thats too many people", "Number of guests exceeds 50", PPA1.splitTip(51, 100));
+	assertEquals("Rounding appropriately is important", 38.33, PPA1.splitter(3, 100), .5);
+    assertEquals("Everyone pays their part.", "guest1-38.34\nguest2-38.33\nguest3-38.33\n", PPA1.splitTip(3, 100.00));
   }
 }
