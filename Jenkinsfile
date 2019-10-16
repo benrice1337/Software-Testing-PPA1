@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'export CLASSPATH="."'
                 sh 'javac PPA1.java'
                 sh 'javac Tests.java'
             }
