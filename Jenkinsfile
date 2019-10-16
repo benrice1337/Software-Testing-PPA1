@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'javac PPA1.java'
+                sh 'javac Tests.java'
             }
         }
     }
