@@ -35,10 +35,23 @@ public class PPA1 {
     	System.out.println(retirement(a, sal, sav, g));
     	break;
       case 3:
-    	System.out.println(shortestDistance());
+    	System.out.println("x1 coordinate: ");
+	    double x1 =s.nextDouble();
+	    System.out.println("y1 coordinate: ");
+	    double y1 =s.nextDouble();
+	    System.out.println("x2 coordinate: ");
+	    double x2 =s.nextDouble();
+	    System.out.println("x2 coordinate: ");
+	    double y2 =s.nextDouble();
+    	System.out.println(shortestDistance(x1, y1, x2, y2));
     	break;
       case 4:
-    	System.out.println(splitTip());
+    	System.out.println("Number of Guests?");
+    	int guests = s.nextInt();
+    	System.out.println("Total bill excluding tax comes to?");
+    	double bill = s.nextDouble();
+    	bill = Math.round(bill*100)/100;
+    	System.out.println(splitTip(guests, bill));
     	break;
       case 5:
     	System.out.println("Bye!");
@@ -92,13 +105,48 @@ public class PPA1 {
 	return goalAge;
   }
 
-  public static String shortestDistance() {
-    //TODO: Function body here
-	return "";
+  public static String shortestDistance(double x1, double y1, double x2, double y2) {
+	double distance = distCalc(x1, y1, x2, y2);
+	return "The distance is " + distance;
   }
+  public static double distCalc(double x1, double y1, double x2, double y2) {
+	  double distanceCalculated = Math.sqrt(((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
+	  return distanceCalculated;
+	  }
 
-  public static String splitTip() {
-    //TODO: Function body here
-	return "";
+  public static String splitTip(int guests, double bill) {
+	  String guestPay = "";
+	  if(guests > 50) {
+		  guestPay = "Number of guests exceeds 50";
+		  return guestPay;
+	  }
+	  double [] guestdist = new double[guests];
+	  double split = splitter(guests, bill);
+	  bill = (Math.round(100*(bill*1.15)))/100;
+	  double difference = bill - (guests*split);
+	  difference = (Math.floor(100*difference))/100;
+	  for(int i=0; i < guests; i++) 
+	  {
+		  guestdist[i] = split;
+	  }
+	  int j = 0;
+	  while(difference > 0) {
+		  guestdist[j] += .01;
+		  guestdist[j] = Math.ceil(100*guestdist[j])/100;
+		  if(j<guests) {
+			  j++;
+		  }
+		  else {j=0;}
+		  difference = difference - .01;
+	  }
+	  for(int i=0; i < guests; i++) {
+		  guestPay += ("guest" + (i+1) + "-$" + guestdist[i] + "\n");
+	  }
+	  return guestPay;
+  }
+  public static double splitter(int guests, double bill) {
+	  double split = Math.floor(100*((bill*1.15)/guests));
+	  split = split/100;
+	  return split;
   }
 }
