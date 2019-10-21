@@ -12,7 +12,7 @@ public class PPA1 {
   	  try
   	  {  
 		  Class.forName("com.mysql.jdbc.Driver");  
-		  con = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/PPA2DB","root","root");    
+		  con = DriverManager.getConnection("jdbc:mysql://localhost:3306/PPA2DB","root","root");    
 		  stmt = con.createStatement();  
 		  rs = stmt.executeQuery("select * from BMI");
 		  ResultSetMetaData metaData = rs.getMetaData();
