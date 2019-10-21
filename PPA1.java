@@ -1,8 +1,38 @@
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.sql.*; 
 
 public class PPA1 {
   public static void main(String[] args) {
+	Statement stmt;
+	ResultSet rs;
+	Connection con;
     while (true) {
+  	  try
+  	  {  
+		  Class.forName("com.mysql.jdbc.Driver");  
+		  con = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/PPA2DB","root","root");    
+		  stmt = con.createStatement();  
+		  rs = stmt.executeQuery("select * from BMI");
+		  ResultSetMetaData metaData = rs.getMetaData();
+		  System.out.println
+		  (metaData.getColumnLabel(1)+" "+metaData.getColumnLabel(2)+" "
+		  +metaData.getColumnLabel(3)+" "+metaData.getColumnLabel(4));
+		  while(rs.next()) {  
+			  System.out.println(rs.getInt(1)+"  "+rs.getInt(2)+"  "+rs.getInt(3)+" "+rs.getString(4));  
+		  }
+		  rs = stmt.executeQuery("select * from Distance");
+		  metaData = rs.getMetaData();
+		  System.out.println
+		  (metaData.getColumnLabel(1)+" "+metaData.getColumnLabel(2)+" "
+		  +metaData.getColumnLabel(3)+" "+metaData.getColumnLabel(4)+" "+metaData.getColumnLabel(5));
+		  while(rs.next()) {  
+			  System.out.println(rs.getDouble(1)+"  "+rs.getDouble(2)+"  "+
+		  rs.getDouble(3)+" "+rs.getDouble(4)+" "+rs.getString(5));  
+		  }
+		  con.close();  
+	  } catch(Exception e) { System.out.println(e); }  
       System.out.println("Pick a function:");
       System.out.println("1. Body Mass Index");
       System.out.println("2. Retirement");
@@ -41,7 +71,7 @@ public class PPA1 {
 	    double y1 =s.nextDouble();
 	    System.out.println("x2 coordinate: ");
 	    double x2 =s.nextDouble();
-	    System.out.println("x2 coordinate: ");
+	    System.out.println("y2 coordinate: ");
 	    double y2 =s.nextDouble();
     	System.out.println(shortestDistance(x1, y1, x2, y2));
     	break;
@@ -68,7 +98,21 @@ public class PPA1 {
     if (feet == 0 && inches == 0) return "Invalid input";
     if (pounds == 0) return "Invalid input";
     
-	double bmi = bmiCalculator(feet, inches, pounds);
+	double bmi = bmiCalculator(feet, inches, pounds);	
+	
+	try
+	{  
+		Class.forName("com.mysql.jdbc.Driver");  
+		Connection con = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/PPA2DB","root","root");    
+		Statement stmt = con.createStatement();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date dt = new Date();
+		String currTime = sdf.format(dt);
+		String query = "insert into BMI("+feet+","+inches+","+pounds+","+currTime+")";
+		ResultSet rs = stmt.executeQuery(query);  
+		con.close();  
+	} catch(Exception e) { System.out.println(e); }
+	
     if (bmi < 18.5) return "Underweight";
     else if (bmi < 25) return "Normal";
     else if (bmi < 30) return "Overweight";
@@ -107,6 +151,20 @@ public class PPA1 {
 
   public static String shortestDistance(double x1, double y1, double x2, double y2) {
 	double distance = distCalc(x1, y1, x2, y2);
+	
+	try
+	{  
+		Class.forName("com.mysql.jdbc.Driver");  
+		Connection con = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/PPA2DB","root","root");    
+		Statement stmt = con.createStatement();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date dt = new Date();
+		String currTime = sdf.format(dt);
+		String query = "insert into BMI("+x1+","+x2+","+y1+","+y2+","+currTime+")";
+		ResultSet rs = stmt.executeQuery(query);  
+		con.close();  
+	} catch(Exception e) { System.out.println(e); }
+	
 	return "The distance is " + distance;
   }
   public static double distCalc(double x1, double y1, double x2, double y2) {
